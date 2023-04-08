@@ -191,7 +191,7 @@ public class RemoveAdsActivity extends AppCompatActivity implements ItemClickLis
                     //Setting setIsRemoveAd to true
                     // true - No ads
                     // false - showing ads.
-                    prefs.setIsRemoveAd(true);
+                    prefs.setRemoveAd(true);
                     reloadScreen();
                 }
             });
@@ -239,9 +239,9 @@ public class RemoveAdsActivity extends AppCompatActivity implements ItemClickLis
                             QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build(), (billingResult1, list) -> {
                                 if (billingResult1.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                                     if (list.size() > 0) {
-                                        prefs.setIsRemoveAd(true); // set true to activate remove ad feature
+                                        prefs.setRemoveAd(true); // set true to activate remove ad feature
                                     } else {
-                                        prefs.setIsRemoveAd(false); // set false to de-activate remove ad feature
+                                        prefs.setRemoveAd(false); // set false to de-activate remove ad feature
                                     }
                                 }
                             });

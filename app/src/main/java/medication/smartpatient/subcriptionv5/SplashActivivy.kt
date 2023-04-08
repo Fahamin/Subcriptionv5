@@ -18,9 +18,7 @@ class SplashActivivy : AppCompatActivity() {
 
         checkSubscription()
 
-        Handler().postDelayed({
-            finish()
-        }, 2000)
+
     }
 
     fun checkSubscription() {
@@ -39,8 +37,8 @@ class SplashActivivy : AppCompatActivity() {
                         if (billingResult1.responseCode == BillingClient.BillingResponseCode.OK) {
                             Log.d("testOffer", list.size.toString() + " size")
                             if (list.size > 0) {
-                                prefs?.setPremium(1)
-                                prefs?.setIsRemoveAd(true)
+                                prefs?.premium = 1
+                                prefs?.isRemoveAd = true
                                 // set 1 to activate premium feature
 // set 1 to activate premium feature
                                 startActivity(
@@ -59,8 +57,8 @@ class SplashActivivy : AppCompatActivity() {
                                     i++
                                 }
                             } else {
-                                prefs?.setPremium(0)
-                                prefs?.setIsRemoveAd(false)
+                                prefs?.premium = 0
+                                prefs?.isRemoveAd = false
                                 startActivity(Intent(this@SplashActivivy, MainActivity::class.java))
 
                                 // set 0 to de-activate premium feature

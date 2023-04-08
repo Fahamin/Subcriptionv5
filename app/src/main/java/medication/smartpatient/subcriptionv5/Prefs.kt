@@ -1,71 +1,65 @@
-package medication.smartpatient.subcriptionv5;
+package medication.smartpatient.subcriptionv5
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Context
+import android.content.SharedPreferences
 
+class Prefs(context: Context) {
 
-public class Prefs {
-    private final SharedPreferences sharedPreferences;
-    private final SharedPreferences.Editor editor;
+    private val sharedPreferences: SharedPreferences
+    private val editor: SharedPreferences.Editor
 
-    public Prefs(Context context) {
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+    init {
+        sharedPreferences =
+            context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
     }
 
-    public void setInt(String key, int value) {
-        editor.putInt(key, value);
-        editor.apply();
+    fun setInt(key: String?, value: Int) {
+        editor.putInt(key, value)
+        editor.apply()
     }
 
-    public void setString(String key, String value) {
-        editor.putString(key, value);
-        editor.apply();
+    fun setString(key: String?, value: String?) {
+        editor.putString(key, value)
+        editor.apply()
     }
 
-    public void setPremium(int value) {
-        editor.putInt("Premium", value);
-        editor.apply();
+    fun setBoolean(key: String?, value: Boolean) {
+        editor.putBoolean(key, value)
+        editor.apply()
     }
 
-    public void setBoolean(String key, boolean value) {
-        editor.putBoolean(key, value);
-        editor.apply();
+    fun getBoolean(key: String?, def: Boolean): Boolean {
+        return sharedPreferences.getBoolean(key, def)
     }
 
-    public boolean getBoolean(String key, boolean def) {
-        return sharedPreferences.getBoolean(key, def);
+    fun getInt(key: String?, def: Int): Int {
+        return sharedPreferences.getInt(key, def)
     }
 
-    public int getInt(String key, int def) {
-        return sharedPreferences.getInt(key, def);
+    fun getString(key: String?, def: String?): String? {
+        return sharedPreferences.getString(key, def)
     }
 
+    var premium: Int
+        get() = sharedPreferences.getInt("Premium", 0)
+        set(value) {
+            editor.putInt("Premium", value)
+            editor.apply()
+        }
+    var isRemoveAd: Boolean
+        get() = getBoolean("isRemoveAd", false)
+        set(value) {
+            editor.putBoolean("isRemoveAd", value)
+            editor.apply()
+        }
 
-    public String getString(String key, String def) {
-        return sharedPreferences.getString(key, def);
+    fun canDownload(): Boolean {
+        return getBoolean("canDownload", false)
     }
 
-    public int getPremium() {
-        return sharedPreferences.getInt("Premium", 0);
+    fun setCanDownload(value: Boolean) {
+        editor.putBoolean("canDownload", value)
+        editor.apply()
     }
-
-    public boolean isRemoveAd() {
-        return getBoolean("isRemoveAd", false);
-    }
-
-    public boolean canDownload() {
-        return getBoolean("canDownload", false);
-    }
-
-    public void setIsRemoveAd(boolean value) {
-        editor.putBoolean("isRemoveAd", value);
-        editor.apply();
-    }
-
-    public void setCanDownload(boolean value) {
-        editor.putBoolean("canDownload", value);
-        editor.apply();
-    }
-
 }
